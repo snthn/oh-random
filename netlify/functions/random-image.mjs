@@ -23,34 +23,54 @@ export default async (req, context) => {
 
     if (!images || images.length === 0) {
         return new Response("Image pool not found", {
-            status: 404
+            status: 404,
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            }
         });
     }
 
     const randomImage =
         images[Math.floor(Math.random() * images.length)];
 
-    const response = await fetch(randomImage);
+    try {
+        const response = await fetch(randomImage, {
+            method: "GET",
+            redirect: "follow",
+            headers: {
+                "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+            }
+        });
 
-    if (!response.ok) {
-        return new Response("Unable to load image", {
-            status: 502
+        if (!response.ok) {
+            return new Response("Unable to load image", {
+                status: 502,
+                headers: {
+                    "Content-Type": "text/plain; charset=utf-8"
+                }
+            });
+        }
+
+        return new Response(response.body, {
+            status: 200,
+            headers: {
+                "Content-Type": "image/png",
+                "Content-Disposition": "inline",
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+                "CDN-Cache-Control": "no-store",
+                "Pragma": "no-cache",
+                "Expires": "0",
+                "Access-Control-Allow-Origin": "*"
+            }
+        });
+    } catch (error) {
+        return new Response("Unable to fetch image", {
+            status: 502,
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            }
         });
     }
-
-    return new Response(response.body, {
-        status: 200,
-        headers: {
-            "Content-Type":
-                response.headers.get("content-type") || "image/gif",
-
-            "Cache-Control":
-                "no-store, no-cache, must-revalidate, proxy-revalidate",
-
-            "CDN-Cache-Control": "no-store",
-            "Netlify-Vary": "query"
-        }
-    });
 };
 
 export const config = {
