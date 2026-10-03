@@ -1,13 +1,18 @@
 const imagePools = {
-    lance: [
-        "https://YOUR-IMAGE-URL-1",
-        "https://YOUR-IMAGE-URL-2",
-        "https://YOUR-IMAGE-URL-3"
+    benny: [
+        "https://iili.io/nl0KqFa.png",
+        "https://iili.io/nl0KK6g.png",
+        "https://iili.io/nl0KFMF.png",
+        "https://iili.io/nl0K3n1.png",
+        "https://iili.io/nl0KdZP.png",
+        "https://iili.io/nl0KJwB.png"
     ],
 
-    sandy: [
-        "https://YOUR-IMAGE-URL-1",
-        "https://YOUR-IMAGE-URL-2"
+    nick: [
+        "https://iili.io/nl0gjEu.png",
+        "https://iili.io/nl0gVh7.png",
+        "https://iili.io/nl0gWQ9.png",
+        "https://iili.io/nl0ghBe.png"
     ]
 };
 
