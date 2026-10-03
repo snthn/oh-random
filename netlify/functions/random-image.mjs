@@ -16,18 +16,9 @@ const imagePools = {
     ]
 };
 
-export default async (req) => {
-    const url = new URL(req.url);
+export default async (req, context) => {
+    const name = context.params.name?.toLowerCase();
 
-    const match = url.pathname.match(/^\/random\/([^/]+)\.gif$/i);
-
-    if (!match) {
-        return new Response("Not found", {
-            status: 404
-        });
-    }
-
-    const name = match[1].toLowerCase();
     const images = imagePools[name];
 
     if (!images || images.length === 0) {
@@ -47,18 +38,21 @@ export default async (req) => {
         });
     }
 
-    const contentType =
-        response.headers.get("content-type") || "image/gif";
-
     return new Response(response.body, {
         status: 200,
         headers: {
-            "Content-Type": contentType,
-            "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+            "Content-Type":
+                response.headers.get("content-type") || "image/gif",
+
+            "Cache-Control":
+                "no-store, no-cache, must-revalidate, proxy-revalidate",
+
             "CDN-Cache-Control": "no-store",
-            "Vercel-CDN-Cache-Control": "no-store",
-            "Pragma": "no-cache",
-            "Expires": "0"
+            "Netlify-Vary": "query"
         }
     });
+};
+
+export const config = {
+    path: "/random/:name.gif"
 };
