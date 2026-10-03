@@ -1,0 +1,7 @@
+[functions]
+directory = "netlify/functions"
+
+[[redirects]]
+from = "/random/*.gif"
+to = "/.netlify/functions/random-image"
+status = 200
