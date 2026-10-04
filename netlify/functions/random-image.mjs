@@ -18,7 +18,6 @@ const imagePools = {
 
 export default async (req, context) => {
     const name = context.params.name?.toLowerCase();
-
     const images = imagePools[name];
 
     if (!images || images.length === 0) {
@@ -34,7 +33,9 @@ export default async (req, context) => {
         status: 302,
         headers: {
             "Location": randomImage,
-            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"
+            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma": "no-cache",
+            "Expires": "0"
         }
     });
 };
