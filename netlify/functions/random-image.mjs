@@ -1,11 +1,11 @@
 const imagePools = {
     benny: [
-        "https://iili.io/nl0KqFa.png",
-        "https://iili.io/nl0KK6g.png",
-        "https://iili.io/nl0KFMF.png",
-        "https://iili.io/nl0K3n1.png",
-        "https://iili.io/nl0KdZP.png",
-        "https://iili.io/nl0KJwB.png"
+        "https://iili.io/nl1HjdQ.png",
+        "https://iili.io/nl1Hw7V.png",
+        "https://iili.io/nl1HNkB.png",
+        "https://iili.io/nl1HkI1.png",
+        "https://iili.io/nl1HvhF.png",
+        "https://iili.io/nl1HOmP.png"
     ],
 
     nick: [
